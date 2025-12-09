@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <style>
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* Navbar */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #2c3e50;
+  color: #fff;
+  padding: 15px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navlist {
+  list-style: none;
+  display: flex;
+}
+
+.navlist li {
+  margin-left: 20px;
+}
+
+.navlist a {
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.navlist a:hover,
+.navlist a.active {
+  color: #1abc9c;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  margin-left: 20px;
+  cursor: pointer;
+  font-size: 28px;
+  color: #fff;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.menu-icon {
+  display: none;
+  font-size: 28px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 101;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  text-align: center;
+  background: linear-gradient(135deg, #2980b9, #2c3e50);
+  color: #fff;
+  padding: 100px 50px 50px;
+  transition: background 0.4s;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.hero-text h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.hero-text span {
+  color: #1abc9c;
+}
+
+.hero-text h2 {
+  margin: 15px 0;
+  font-size: 22px;
+  color: #f1f1f1;
+  min-height: 30px;
+}
+
+.hero-text p {
+  margin: 15px 0;
+}
+
+.hero-image {
+  flex: 0 0 auto;
+}
+
+.hero-image img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.btn {
+  display: inline-block;
+  background: #1abc9c;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background: #16a085;
+}
+
+/* Sections */
+section {
+  padding: 80px 20px;
+  text-align: center;
+  transition: background 0.4s, color 0.4s;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin-bottom: 40px;
+  color: #2c3e50;
+  font-size: 32px;
+}
+
+/* Skills */
+.skills-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  list-style: none;
+}
+
+.skills-list li {
+  background: #1abc9c;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  transition: transform 0.3s;
+}
+
+.skills-list li:hover {
+  transform: scale(1.1);
+}
+
+/* Projects - FIXED GRID LAYOUT */
+.project-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.project-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.project-card h3 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.project-card p {
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: auto;
+}
+
+/* Contact */
+#contact p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.socials {
+  margin-top: 20px;
+}
+
+.socials a {
+  font-size: 32px;
+  margin: 0 15px;
+  color: #2c3e50;
+  transition: 0.3s;
+}
+
+.socials a:hover {
+  color: #1abc9c;
+  transform: scale(1.2);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #2c3e50;
+  color: #fff;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* Fade-in Animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================= DARK MODE ================= */
+body.dark-mode {
+  background: #1e1e1e;
+  color: #eaeaea;
+}
+
+body.dark-mode header {
+  background: #111;
+}
+
+body.dark-mode .hero {
+  background: linear-gradient(135deg, #0f2027, #2c5364);
+}
+
+body.dark-mode h2,
+body.dark-mode .project-card h3 {
+  color: #1abc9c;
+}
+
+body.dark-mode .project-card {
+  background: #2a2a2a;
+  color: #eaeaea;
+}
+
+body.dark-mode .socials a {
+  color: #eaeaea;
+}
+
+body.dark-mode footer {
+  background: #111;
+}
+
+/* ========================= */
+/* RESPONSIVE DESIGN */
+/* ========================= */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  header {
+    padding: 15px 30px;
+  }
+
+  .hero {
+    padding: 100px 30px 50px;
+  }
+
+  .hero-text h1 {
+    font-size: 32px;
+  }
+
+  .project-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  header {
+    padding: 15px 20px;
+  }
+
+  .navlist {
+    position: absolute;
+    top: 60px;
+    left: -100%;
+    background: #2c3e50;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    transition: left 0.3s ease;
+    padding: 20px 0;
+  }
+
+  .navlist li {
+    margin: 15px 0;
+  }
+
+  .navlist.active {
+    left: 0;
+  }
+
+  .hero {
+    flex-direction: column;
+    padding: 100px 20px 50px;
+    min-height: auto;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-text h1 {
+    font-size: 28px;
+  }
+
+  .hero-text h2 {
+    font-size: 20px;
+  }
+
+  .hero-image img {
+    width: 200px;
+    height: 200px;
+  }
+
+  section {
+    padding: 60px 15px;
+  }
+
+  h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .project-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 10px;
+  }
+
+  .project-card img {
+    height: 180px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 18px;
+  }
+
+  .hero-text h1 {
+    font-size: 24px;
+  }
+
+  .hero-text h2 {
+    font-size: 18px;
+  }
+
+  .hero-image img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .project-card h3 {
+    font-size: 18px;
+  }
+
+  .project-card p {
+    font-size: 14px;
+  }
+
+  .skills-list li {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+
+  #contact p {
+    font-size: 16px;
+  }
+
+  .socials a {
+    font-size: 28px;
+    margin: 0 10px;
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <a href="#" class="logo">MyPortfolio</a>
+    <ul class="navlist">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="theme-toggle">
+      <i class='bx bx-moon' id="darkToggle"></i>
+    </div>
+    <div class="menu-icon" id="menuIcon">
+      <i class='bx bx-menu'></i>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-text">
+      <h1>Hello, I'm <span>Sharjeel Ahmed</span></h1>
+      <h2><span id="typing"></span></h2>
+      <p>Computer Science Undergraduate | Front-End Developer</p>
+      <a href="#contact" class="btn">Hire Me</a>
+    </div>
+    <div class="hero-image">
+      <img src="https://via.placeholder.com/250" alt="Sharjeel Ahmed">
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="fade-in">
+    <h2>About Me</h2>
+    <p>
+      I am an enthusiastic Computer Science undergraduate passionate about 
+      front-end development and building modern, responsive web applications. 
+      I enjoy learning new technologies and improving my skills.
+    </p>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="fade-in">
+    <h2>Skills</h2>
+    <ul class="skills-list">
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>React</li>
+      <li>Git & GitHub</li>
+    </ul>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="fade-in">
+    <h2>Basic Projects</h2>
+    <div class="project-container">
+      <div class="project-card">
+        <h3>To-do List</h3>
+        <p>Simple but modern looking to-do list app created with HTML, CSS, JS.</p>
+        <img src="https://via.placeholder.com/300x200/1abc9c/fff?text=Todo+List" alt="Todo List">
+      </div>
+      <div class="project-card">
+        <h3>Login Page</h3>
+        <p>A stylish and secure login form created with HTML and CSS, JS.</p>
+        <img src="https://via.placeholder.com/300x200/3498db/fff?text=Login+Page" alt="Login Page">
+      </div>
+      <div class="project-card">
+        <h3>Calculator</h3>
+        <p>Simple Calculator to solve mathematical problems created with HTML, CSS, JS.</p>
+        <img src="https://via.placeholder.com/300x200/e74c3c/fff?text=Calculator" alt="Calculator">
+      </div>
+    </div>
+  </section>
+
+  <!-- Fun Projects Section -->
+  <section id="fun-projects" class="fade-in">
+    <h2>Fun Projects</h2>
+    <div class="project-container">
+      <div class="project-card">
+        <h3>Rock Paper Scissors Game</h3>
+        <p>A simple JavaScript game where you play against the computer.</p>
+        <img src="https://via.placeholder.com/300x200/9b59b6/fff?text=RPS+Game" alt="Rock Paper Scissors">
+      </div>
+      <div class="project-card">
+        <h3>Number Guessing Game</h3>
+        <p>Guess the number between 1 and 100, built with HTML, CSS & JS.</p>
+        <img src="https://via.placeholder.com/300x200/f39c12/fff?text=Guessing+Game" alt="Number Guessing Game">
+      </div>
+      <div class="project-card">
+        <h3>Photo Booth</h3>
+        <p>A fun photo booth with filters and effects using JavaScript for capturing photos.</p>
+        <img src="https://via.placeholder.com/300x200/1abc9c/fff?text=Photo+Booth" alt="Photo Booth">
+      </div>
+    </div>
+  </section>
+
+  <!-- Web Projects Section -->
+  <section id="basic-projects" class="fade-in">
+    <h2>Web Projects</h2>
+    <div class="project-container">
+      <div class="project-card">
+        <h3>E-commerce Website</h3>
+        <p>A clean and simple Ecommerce website with responsive layout using HTML, CSS & JavaScript.</p>
+        <img src="https://via.placeholder.com/300x200/e67e22/fff?text=E-commerce" alt="E-commerce">
+      </div>
+      <div class="project-card">
+        <h3>Gaming Website</h3>
+        <p>A basic gaming website design with responsive layout and minimal HTML, CSS, JavaScript.</p>
+        <img src="https://via.placeholder.com/300x200/2ecc71/fff?text=Gaming+Site" alt="Gaming Website">
+      </div>
+      <div class="project-card">
+        <h3>Form Validation</h3>
+        <p>Basic HTML form with JavaScript validation for inputs.</p>
+        <img src="https://via.placeholder.com/300x200/c0392b/fff?text=Form+Validation" alt="Form Validation">
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="fade-in">
+    <h2>Contact Me</h2>
+    <p>Email: sharjeeljutt115@gmail.com</p>
+    <p>Phone: +92 3183657007</p>
+    <div class="socials">
+      <a href="#" aria-label="GitHub"><i class='bx bxl-github'></i></a>
+      <a href="#" aria-label="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+      <a href="#" aria-label="Twitter"><i class='bx bxl-twitter'></i></a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 SHARJEEL AHMED | All Rights Reserved</p>
+  </footer>
+
+  <script>
+// Typing Effect
+const typingElement = document.getElementById("typing");
+const textArray = ["Front-End Developer", "Web Designer", "Tech Enthusiast"];
+let textIndex = 0;
+let charIndex = 0;
+
+function typeEffect() {
+  if (charIndex < textArray[textIndex].length) {
+    typingElement.textContent += textArray[textIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(typeEffect, 100);
+  } else {
+    setTimeout(eraseEffect, 1500);
+  }
+}
+
+function eraseEffect() {
+  if (charIndex > 0) {
+    typingElement.textContent = textArray[textIndex].substring(0, charIndex - 1);
+    charIndex--;
+    setTimeout(eraseEffect, 50);
+  } else {
+    textIndex = (textIndex + 1) % textArray.length;
+    setTimeout(typeEffect, 200);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", typeEffect);
+
+// Fade-in on scroll
+const faders = document.querySelectorAll(".fade-in");
+
+window.addEventListener("scroll", () => {
+  faders.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      el.classList.add("show");
+    }
+  });
+});
+
+// Dark Mode Toggle
+const toggleBtn = document.getElementById("darkToggle");
+const body = document.body;
+
+// Check saved theme (Note: localStorage won't persist in artifacts)
+toggleBtn.addEventListener("click", () => {
+  body.classList.toggle("dark-mode");
+  if (body.classList.contains("dark-mode")) {
+    toggleBtn.classList.replace("bx-moon", "bx-sun");
+  } else {
+    toggleBtn.classList.replace("bx-sun", "bx-moon");
+  }
+});
+
+// Mobile Menu Toggle
+const menuIcon = document.getElementById("menuIcon");
+const navlist = document.querySelector(".navlist");
+
+menuIcon.addEventListener("click", () => {
+  navlist.classList.toggle("active");
+  menuIcon.innerHTML = navlist.classList.contains("active") 
+    ? "<i class='bx bx-x'></i>" 
+    : "<i class='bx bx-menu'></i>";
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.navlist a').forEach(link => {
+  link.addEventListener('click', () => {
+    navlist.classList.remove('active');
+    menuIcon.innerHTML = "<i class='bx bx-menu'></i>";
+  });
+});
+  </script>
+</body>
+</html>
