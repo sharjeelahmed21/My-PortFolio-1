@@ -166,12 +166,41 @@ section {
   transition: background 0.4s, color 0.4s;
   max-width: 1400px;
   margin: 0 auto;
+  position: relative;
 }
 
 h2 {
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   color: #2c3e50;
-  font-size: 32px;
+  font-size: 38px;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 15px;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #1abc9c, #16a085);
+  border-radius: 2px;
+}
+
+h2::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background: #1abc9c;
+  border-radius: 2px;
 }
 
 /* Skills */
@@ -195,11 +224,11 @@ h2 {
   transform: scale(1.1);
 }
 
-/* Projects - FIXED GRID LAYOUT */
+/* Projects - PROFESSIONAL GRID LAYOUT */
 .project-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 35px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
@@ -207,36 +236,102 @@ h2 {
 
 .project-card {
   background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
   flex-direction: column;
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #1abc9c, #16a085);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover::before {
+  transform: scaleX(1);
 }
 
 .project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-.project-card h3 {
-  color: #2c3e50;
-  margin-bottom: 10px;
-  font-size: 20px;
-}
-
-.project-card p {
-  margin-bottom: 15px;
-  flex-grow: 1;
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(26, 188, 156, 0.2);
 }
 
 .project-card img {
   width: 100%;
-  height: 200px;
+  height: 220px;
   object-fit: cover;
-  border-radius: 8px;
-  margin-top: auto;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.1);
+}
+
+.project-card-content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.project-card h3 {
+  color: #2c3e50;
+  margin-bottom: 12px;
+  font-size: 22px;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.project-card:hover h3 {
+  color: #1abc9c;
+}
+
+.project-card p {
+  margin-bottom: 20px;
+  flex-grow: 1;
+  color: #666;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.project-card .btn {
+  align-self: flex-start;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.project-card .btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #16a085;
+  transition: left 0.4s ease;
+  z-index: -1;
+}
+
+.project-card .btn:hover::before {
+  left: 0;
 }
 
 /* Contact */
@@ -304,6 +399,15 @@ body.dark-mode .project-card h3 {
 body.dark-mode .project-card {
   background: #2a2a2a;
   color: #eaeaea;
+  border-color: rgba(255,255,255,0.1);
+}
+
+body.dark-mode .project-card:hover {
+  box-shadow: 0 15px 35px rgba(26, 188, 156, 0.3);
+}
+
+body.dark-mode .project-card p {
+  color: #ccc;
 }
 
 body.dark-mode .socials a {
@@ -470,10 +574,10 @@ body.dark-mode footer {
     <ul class="navlist">
       <li><a href="#home" class="active">Home</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#about">Certificates</a></li>
+      <li><a href="#Certificates">Certificates</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#React.JS">React</a></li>
+      <li><a href="#React">React</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="theme-toggle">
@@ -501,96 +605,108 @@ body.dark-mode footer {
   <section id="about" class="fade-in">
     <h2>About Me</h2>
     <p>
-      Hi, I’m Sharjeel Ahmed, a professional Frontend Developer and Designer with a love for creating web experiences that are both beautiful and functional. My journey in web development started with curiosity—I wanted to understand how websites worked and how design could come alive through code. That curiosity turned into a passion, and now I specialize in HTML, CSS, JavaScript, and React, building responsive, interactive, and user-friendly websites.
+      Hi, I'm Sharjeel Ahmed, a professional Frontend Developer and Designer with a love for creating web experiences that are both beautiful and functional. My journey in web development started with curiosity—I wanted to understand how websites worked and how design could come alive through code. That curiosity turned into a passion, and now I specialize in HTML, CSS, JavaScript, and React, building responsive, interactive, and user-friendly websites.
 
 What drives me is the challenge of turning ideas into real-world solutions. I enjoy crafting clean, efficient code while paying attention to design details, ensuring every project I work on is visually appealing, intuitive, and seamless for users.
 
-I’m always learning and exploring new technologies, aiming to stay ahead in the fast-evolving world of web development. Beyond coding, I value collaboration, creativity, and delivering high-quality work that makes a real impact.
+I'm always learning and exploring new technologies, aiming to stay ahead in the fast-evolving world of web development. Beyond coding, I value collaboration, creativity, and delivering high-quality work that makes a real impact.
 
-Whether it’s developing a sleek interface, a dynamic web application, or experimenting with new design trends, I bring both professionalism and passion to everything I do. My goal is to create web experiences that not only meet expectations but leave a lasting impression.
+Whether it's developing a sleek interface, a dynamic web application, or experimenting with new design trends, I bring both professionalism and passion to everything I do. My goal is to create web experiences that not only meet expectations but leave a lasting impression.
     </p>
   </section>
+
   <!--Certificates section -->
+  <section id="Certificates" class="fade-in">
+    <h2>Google Certificates</h2>
 
-<section id="Certificates" class="fade-in">
-  <h2>Google Certificates</h2>
+    <div class="project-container">
+      <!-- 1 -->
+      <div class="project-card">
+        <img src="certificate-ux.png" alt="Google UX Design Certificate">
+        <div class="project-card-content">
+          <h3>User Design Experience</h3>
+          <p>A clean and simple UX design certification by Google.</p>
+          <a href="https://www.coursera.org/account/accomplishments/verify/I95RCQOKTO52"
+             class="btn" target="_blank" rel="noopener noreferrer">
+            View Certificate
+          </a>
+        </div>
+      </div>
 
-  <div class="project-container">
+      <!-- 2 -->
+      <div class="project-card">
+        <img src="cybersecurity.PNG" alt="Google Cybersecurity Certificate">
+        <div class="project-card-content">
+          <h3>Cyber Security</h3>
+          <p>Google Cybersecurity Professional Certificate.</p>
+          <a href="https://www.coursera.org/account/accomplishments/verify/SLE34CQUG32G"
+             class="btn" target="_blank" rel="noopener noreferrer">
+            View Certificate
+          </a>
+        </div>
+      </div>
 
-    <!-- 1 -->
-    <div class="project-card">
-      <img src="certificate-ux.png" alt="Google UX Design Certificate">
-      <h3>User Design Experience</h3>
-      <p>A clean and simple UX design certification by Google.</p>
-      <a href="https://www.coursera.org/account/accomplishments/verify/I95RCQOKTO52"
-         class="btn" target="_blank" rel="noopener noreferrer">
-        View Certificate
-      </a>
+      <!-- 3 -->
+      <div class="project-card">
+        <img src="certificate-data.png" alt="Google Data Analytics Certificate">
+        <div class="project-card-content">
+          <h3>Data Analytics</h3>
+          <p>Google Data Analytics Professional Certificate.</p>
+          <a href="#" class="btn" target="_blank" rel="noopener noreferrer">
+            View Certificate
+          </a>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="project-card">
+        <img src="certificate-it.png" alt="Google IT Support Certificate">
+        <div class="project-card-content">
+          <h3>IT Support</h3>
+          <p>Google IT Support Professional Certificate.</p>
+          <a href="#" class="btn" target="_blank" rel="noopener noreferrer">
+            View Certificate
+          </a>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="project-card">
+        <img src="project managment.PNG" alt="Google Project Management Certificate">
+        <div class="project-card-content">
+          <h3>Project Management</h3>
+          <p>Google Project Management Professional Certificate.</p>
+          <a href="#" class="btn" target="_blank" rel="noopener noreferrer">
+            View Certificate
+          </a>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="project-card">
+        <img src="certificate-ai.png" alt="Google AI Essentials Certificate">
+        <div class="project-card-content">
+          <h3>AI Essentials</h3>
+          <p>Google AI Essentials Certification.</p>
+          <a href="#" class="btn" target="_blank" rel="noopener noreferrer">
+            View Certificate
+          </a>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="project-card">
+        <img src="certificate-dm.png" alt="Google Digital Marketing Certificate">
+        <div class="project-card-content">
+          <h3>Digital Marketing</h3>
+          <p>Google Digital Marketing & E-commerce Certificate.</p>
+          <a href="#" class="btn" target="_blank" rel="noopener noreferrer">
+            View Certificate
+          </a>
+        </div>
+      </div>
     </div>
-
-    <!-- 2 -->
-    <div class="project-card">
-      <img src="cybersecurity.PNG" alt="Google Cybersecurity Certificate">
-      <h3>Cyber Security</h3>
-      <p>Google Cybersecurity Professional Certificate.</p>
-      <a href="https://www.coursera.org/account/accomplishments/verify/SLE34CQUG32G"
-         class="btn" target="_blank" rel="noopener noreferrer">
-        View Certificate
-      </a>
-    </div>
-
-    <!-- 3 -->
-    <div class="project-card">
-      <img src="certificate-data.png" alt="Google Data Analytics Certificate">
-      <h3>Data Analytics</h3>
-      <p>Google Data Analytics Professional Certificate.</p>
-      <a href="#" class="btn" target="_blank" rel="noopener noreferrer">
-        View Certificate
-      </a>
-    </div>
-
-    <!-- 4 -->
-    <div class="project-card">
-      <img src="certificate-it.png" alt="Google IT Support Certificate">
-      <h3>IT Support</h3>
-      <p>Google IT Support Professional Certificate.</p>
-      <a href="#" class="btn" target="_blank" rel="noopener noreferrer">
-        View Certificate
-      </a>
-    </div>
-
-    <!-- 5 -->
-    <div class="project-card">
-      <img src="project managment.PNG" alt="Google Project Management Certificate">
-      <h3>Project Management</h3>
-      <p>Google Project Management Professional Certificate.</p>
-      <a href="#" class="btn" target="_blank" rel="noopener noreferrer">
-        View Certificate
-      </a>
-    </div>
-
-    <!-- 6 -->
-    <div class="project-card">
-      <img src="certificate-ai.png" alt="Google AI Essentials Certificate">
-      <h3>AI Essentials</h3>
-      <p>Google AI Essentials Certification.</p>
-      <a href="#" class="btn" target="_blank" rel="noopener noreferrer">
-        View Certificate
-      </a>
-    </div>
-
-    <!-- 7 -->
-    <div class="project-card">
-      <img src="certificate-dm.png" alt="Google Digital Marketing Certificate">
-      <h3>Digital Marketing</h3>
-      <p>Google Digital Marketing & E-commerce Certificate.</p>
-      <a href="#" class="btn" target="_blank" rel="noopener noreferrer">
-        View Certificate
-      </a>
-    </div>
-
-  </div>
-</section>
+  </section>
   
   <!-- Skills Section -->
   <section id="skills" class="fade-in">
@@ -609,22 +725,28 @@ Whether it’s developing a sleek interface, a dynamic web application, or exper
     <h2>Basic Projects</h2>
     <div class="project-container">
       <div class="project-card">
-        <h3>To-do List</h3>
-        <p>Simple but modern looking to-do list app created with HTML, CSS, JS.</p>
         <img src="Capture6.PNG" alt="Todo List">
-        <a href="https://sharjeelahmed21.github.io/To-do-list/" class="btn">Live Demo</a>
+        <div class="project-card-content">
+          <h3>To-do List</h3>
+          <p>Simple but modern looking to-do list app created with HTML, CSS, JS.</p>
+          <a href="https://sharjeelahmed21.github.io/To-do-list/" class="btn">Live Demo</a>
+        </div>
       </div>
       <div class="project-card">
-        <h3>Login Page</h3>
-        <p>A stylish and secure login form created with HTML and CSS, JS.</p>
         <img src="Capture2.PNG" alt="Login Page">
-        <a href="https://sharjeelahmed21.github.io/Login-page/" class="btn">Live Demo</a>
+        <div class="project-card-content">
+          <h3>Login Page</h3>
+          <p>A stylish and secure login form created with HTML and CSS, JS.</p>
+          <a href="https://sharjeelahmed21.github.io/Login-page/" class="btn">Live Demo</a>
+        </div>
       </div>
       <div class="project-card">
-        <h3>Calculator</h3>
-        <p>Simple Calculator to solve mathematical problems created with HTML, CSS, JS.</p>
         <img src="Capture4.PNG" alt="Calculator">
-        <a href="https://sharjeelahmed21.github.io/CodeAlpha_Task1/" class="btn">Live Demo</a>
+        <div class="project-card-content">
+          <h3>Calculator</h3>
+          <p>Simple Calculator to solve mathematical problems created with HTML, CSS, JS.</p>
+          <a href="https://sharjeelahmed21.github.io/CodeAlpha_Task1/" class="btn">Live Demo</a>
+        </div>
       </div>
      </div>
   </section>
@@ -634,22 +756,28 @@ Whether it’s developing a sleek interface, a dynamic web application, or exper
     <h2>Fun Projects</h2>
     <div class="project-container">
       <div class="project-card">
-        <h3>Rock Paper Scissors Game</h3>
-        <p>A simple JavaScript game where you play against the computer.</p>
         <img src="Capture54.PNG" alt="Rock Paper Scissors">
-        <a href="https://sharjeelahmed21.github.io/Rock-Paper-Scissor/" class="btn">Live Demo</a>
+        <div class="project-card-content">
+          <h3>Rock Paper Scissors Game</h3>
+          <p>A simple JavaScript game where you play against the computer.</p>
+          <a href="https://sharjeelahmed21.github.io/Rock-Paper-Scissor/" class="btn">Live Demo</a>
+        </div>
       </div>
       <div class="project-card">
-        <h3>Number Guessing Game</h3>
-        <p>Guess the number between 1 and 100, built with HTML, CSS & JS.</p>
         <img src="Capture12.PNG" alt="Number Guessing Game">
-        <a href="https://sharjeelahmed21.github.io/Guessing-Game/" class="btn">Live Demo</a>
+        <div class="project-card-content">
+          <h3>Number Guessing Game</h3>
+          <p>Guess the number between 1 and 100, built with HTML, CSS & JS.</p>
+          <a href="https://sharjeelahmed21.github.io/Guessing-Game/" class="btn">Live Demo</a>
+        </div>
       </div>
       <div class="project-card">
-        <h3>Photo Booth</h3>
-        <p>A fun photo booth with filters and effects using JavaScript for capturing photos.</p>
         <img src="Capturess.PNG" alt="Photo Booth">
-        <a href="https://sharjeelahmed21.github.io/Photo-Booth/" class="btn">Live Demo</a>
+        <div class="project-card-content">
+          <h3>Photo Booth</h3>
+          <p>A fun photo booth with filters and effects using JavaScript for capturing photos.</p>
+          <a href="https://sharjeelahmed21.github.io/Photo-Booth/" class="btn">Live Demo</a>
+        </div>
       </div>        
     </div>
   </section>
@@ -659,44 +787,53 @@ Whether it’s developing a sleek interface, a dynamic web application, or exper
     <h2>Web Projects</h2>
     <div class="project-container">
       <div class="project-card">
-        <h3>E-commerce Website</h3>
-        <p>A clean and simple Ecommerce website with responsive layout using HTML, CSS & JavaScript.</p>
         <img src="Capture21.PNG" alt="E-commerce">
-        <a href="https://sharjeelahmed21.github.io/ECOMMERCE-WEBSITE/" class="btn">Live Demo</a>
+        <div class="project-card-content">
+          <h3>E-commerce Website</h3>
+          <p>A clean and simple Ecommerce website with responsive layout using HTML, CSS & JavaScript.</p>
+          <a href="https://sharjeelahmed21.github.io/ECOMMERCE-WEBSITE/" class="btn">Live Demo</a>
+        </div>
       </div>
       <div class="project-card">
-        <h3>Gaming Website</h3>
-        <p>A basic gaming website design with responsive layout and minimal HTML, CSS, JavaScript.</p>
         <img src="Capture23.PNG" alt="Gaming Website">
-        <a href="#" class="btn">Live Demo</a>
+        <div class="project-card-content">
+          <h3>Gaming Website</h3>
+          <p>A basic gaming website design with responsive layout and minimal HTML, CSS, JavaScript.</p>
+          <a href="#" class="btn">Live Demo</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- React.JS Projects -->
-  
-<section id="React" class="fade-in">
+  <section id="React" class="fade-in">
     <h2>React.JS Projects</h2>
     <div class="project-container">
       <div class="project-card">
-        <h3>DASHBOARD WEB APP</h3>
-        <p>A React Project.</p>
         <img src="chatbot.PNG" alt="#">
-        <a href="#" class="btn">Live Demo</a>
+        <div class="project-card-content">
+          <h3>DASHBOARD WEB APP</h3>
+          <p>A React Project.</p>
+          <a href="#" class="btn">Live Demo</a>
+        </div>
       </div>
       <div class="project-card">
-        <h3>AI Chatbot Web App</h3>
-        <p>A modern AI-powered chatbot built using React.
+        <img src="chatbot.PNG" alt="AIChatbot">
+        <div class="project-card-content">
+          <h3>AI Chatbot Web App</h3>
+          <p>A modern AI-powered chatbot built using React.
         Features real-time messaging, API integration, error handling, responsive design, and dark mode.
         Focused on clean UI/UX and production-ready frontend architecture.</p>
-        <img src="chatbot.PNG" alt="AIChatbot">
-        <a href="#" class="btn">Live Demo</a>
+          <a href="#" class="btn">Live Demo</a>
+        </div>
       </div>
       <div class="project-card">
-        <h3>TO DO LIST</h3>
-        <p> A React Project.</p>
         <img src="#" alt="#">
-        <a href="#" class="btn">Live Demo</a>
+        <div class="project-card-content">
+          <h3>TO DO LIST</h3>
+          <p> A React Project.</p>
+          <a href="#" class="btn">Live Demo</a>
+        </div>
       </div>
      </div>
   </section>
@@ -764,7 +901,6 @@ window.addEventListener("scroll", () => {
 const toggleBtn = document.getElementById("darkToggle");
 const body = document.body;
 
-// Check saved theme (Note: localStorage won't persist in artifacts)
 toggleBtn.addEventListener("click", () => {
   body.classList.toggle("dark-mode");
   if (body.classList.contains("dark-mode")) {
